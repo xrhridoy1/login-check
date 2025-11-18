@@ -1,30 +1,13 @@
-'use client'
-import { createClient } from '@/utils/supabase/client';
-import { redirect, useSearchParams } from 'next/navigation';
-import React, { useEffect } from 'react';
 
-const ConfirmPage = () => {
-    const searchParam = useSearchParams();
-    const message = searchParam.get('message')
-    const supabase = createClient()
+import ConfirmPage from "@/components/confirmPage/ConfirmPage";
+import { Suspense } from "react";
 
-    useEffect(() => {
-        const loggedin = async () => {
-            const { data: { user } } = await supabase.auth.getUser();
-            if (user) {
-                redirect('/')
-            }
-        }
-        loggedin()
-    }, [supabase])
+export const dynamic = "force-dynamic"; 
 
+export default function Page() {
     return (
-        <main className='main-width mt-20 flex justify-center h-[70vh] items-center'>
-            <div className='max-w-[500px] w-full border border-slate-200 dark:border-neutral-700 shadow rounded p-4 md:p-10 text-center'>
-                <p>{message}</p>
-            </div>
-        </main>
+        <Suspense fallback={<div>Loading...</div>}>
+            <ConfirmPage />
+        </Suspense>
     );
-};
-
-export default ConfirmPage;
+}
