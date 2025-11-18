@@ -11,7 +11,7 @@ const forgatePassword = async (formData: FormData) => {
     console.log(email)
 
     const { error } = await (await supabase).auth.resetPasswordForEmail(email, {
-        redirectTo: process.env.NEXT_PUBLIC_SITE_URL + '/reset-password',
+        redirectTo: 'https://login-check-hj4m.vercel.app/' + 'reset-password',
     })
     if (error) {
         redirect(`/confirm?message=Error: ${error.message}`);
@@ -30,7 +30,7 @@ const ForgatePage = async () => {
         redirect('/')
     }
 
-    
+
     return (
         <main className='main-width mt-20'>
             <form action={forgatePassword} className='flex items-center justify-center  h-[60vh] w-full ' autoComplete='disable'>
