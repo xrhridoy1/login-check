@@ -19,7 +19,7 @@ const signUp = async (formData: FormData) => {
         password,
         options: {
             data: { display_name: name },
-            emailRedirectTo: 'https://login-check-hj4m.vercel.app/',
+            emailRedirectTo:  process.env.NEXT_PUBLIC_SITE_URL,
         },
     });
 
